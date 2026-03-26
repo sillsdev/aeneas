@@ -5,7 +5,7 @@ on:
 
 jobs:
   pyinstaller-build:
-    runs-on: mac-latest
+    runs-on: macos-latest
     steps:
       - name: Checkout app-builders-pyinstaller
         uses: actions/checkout@v5
