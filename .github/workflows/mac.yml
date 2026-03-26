@@ -1,11 +1,11 @@
-name: PyInstaller Linux one dir release
+name: PyInstaller Mac one dir release
 
 on:
   workflow_dispatch:
 
 jobs:
   pyinstaller-build:
-    runs-on: ubuntu-22.04
+    runs-on: mac-latest
     steps:
       - name: Checkout app-builders-pyinstaller
         uses: actions/checkout@v5
@@ -13,24 +13,24 @@ jobs:
       - name: Install dependencies and create one dir executable
         run: |
           echo "Install OS dependencies"
-          sudo apt update
-          sudo apt install espeak libespeak-dev espeak-data libespeak1 python3-dev
-          echo "Creating Python Virtual environment..."
-          python3 -m venv .venv
-          source .venv/bin/activate
+          brew update && brew install espeak-ng python@3.14
+          echo "Creating Python virtual environment... "
+          python3.14 -m venv .venv 
+          source .venv/bin/activate 
           echo "Install Python requirements... "
           pip install -r requirements.txt
           echo "Build Aeneas C extensions... "
-          python setup.py build_ext --inplace
+          export LIBRARY_PATH=/opt/homebrew/lib
+          python setup.py build_ext --inplace 
 
-          echo "Create PyInstaller one directory executable"
+          echo "Create Pyinstaller one directory executable"
           pyinstaller pyinstaller-onedir.spec --clean
 
       - name: Tar build
-        run: tar -cvf aeneas-cli.linux.tar ./dist/aeneas-cli
+        run: tar -cvf aeneas-cli.mac.tar ./dist/aeneas-cli
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: aeneas-cli.linux.tar
-          path: aeneas-cli.linux.tar
+          name: aeneas-cli.mac.tar
+          path: aeneas-cli.mac.tar

@@ -1,11 +1,11 @@
-name: PyInstaller Linux one dir release
+name: PyInstaller Windows one dir release
 
 on:
   workflow_dispatch:
 
 jobs:
   pyinstaller-build:
-    runs-on: ubuntu-22.04
+    runs-on: windows-latest
     steps:
       - name: Checkout app-builders-pyinstaller
         uses: actions/checkout@v5
@@ -13,24 +13,23 @@ jobs:
       - name: Install dependencies and create one dir executable
         run: |
           echo "Install OS dependencies"
-          sudo apt update
-          sudo apt install espeak libespeak-dev espeak-data libespeak1 python3-dev
-          echo "Creating Python Virtual environment..."
-          python3 -m venv .venv
-          source .venv/bin/activate
+          choco install espeak-ng python
+          echo "Creating python Virtual environment... "
+          python -m venv .venv 
+          .venv\Scripts\activate 
           echo "Install Python requirements... "
-          pip install -r requirements.txt
+          pip install -r requirements.txt 
           echo "Build Aeneas C extensions... "
           python setup.py build_ext --inplace
 
           echo "Create PyInstaller one directory executable"
           pyinstaller pyinstaller-onedir.spec --clean
 
-      - name: Tar build
-        run: tar -cvf aeneas-cli.linux.tar ./dist/aeneas-cli
+      - name: Tar build # It appears that windows has a tar command
+        run: tar -cvf aeneas-cli.win.tar .\dist\aeneas-cli
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: aeneas-cli.linux.tar
-          path: aeneas-cli.linux.tar
+          name: aeneas-cli.win.tar
+          path: aeneas-cli.win.tar
