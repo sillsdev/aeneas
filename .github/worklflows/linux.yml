@@ -2,6 +2,8 @@ name: PyInstaller Linux one dir executable
 
 on:
   workflow_dispatch:
+    branches:
+      - app-builders-pyinstaller
 
 jobs:
   pyinstaller-build:
