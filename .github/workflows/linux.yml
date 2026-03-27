@@ -35,4 +35,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: aeneas-cli.linux.tar
-          path: aeneas-cli.linux.tar
+          path: dist/aeneas-cli.linux.tar

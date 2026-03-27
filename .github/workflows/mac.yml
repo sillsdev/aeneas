@@ -38,4 +38,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: aeneas-cli.mac.tar
-          path: aeneas-cli.mac.tar
+          path: dist/aeneas-cli.mac.tar
