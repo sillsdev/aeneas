@@ -26,9 +26,6 @@ jobs:
           echo "Create Pyinstaller one directory executable"
           pyinstaller pyinstaller-onedir.spec --clean
 
-      - name: Allow binary execution
-        run: xattr -d com.apple.quarantine dist/aeneas-cli/aeneas-cli
-
       - name: Tar build
         run: |
           cd dist
