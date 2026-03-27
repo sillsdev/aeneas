@@ -14,7 +14,7 @@ jobs:
         run: |
           echo "Install OS dependencies"
           choco install espeak-ng python ffmpeg
-          New-Item -ItemType HardLink -Path "C:\Program Files\eSpeak NG\espeak" -Target "C:\Program Files\eSpeak NG\espeak-ng"
+          New-Item -ItemType HardLink -Path "C:\Program Files\eSpeak NG\espeak.exe" -Target "C:\Program Files\eSpeak NG\espeak-ng.exe"
           echo "Creating python Virtual environment... "
           python -m venv .venv 
           .venv\Scripts\activate 
