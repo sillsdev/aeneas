@@ -5,7 +5,7 @@ on:
 
 jobs:
   pyinstaller-build:
-    runs-on: macos-latest
+    runs-on: mac-latest
     steps:
       - name: Checkout app-builders-pyinstaller
         uses: actions/checkout@v5
@@ -13,21 +13,26 @@ jobs:
       - name: Install dependencies and create one dir executable
         run: |
           echo "Install OS dependencies"
-          brew update && brew install espeak-ng python@3.14
+          brew update && brew install espeak-ng 
           echo "Creating Python virtual environment... "
           python3.14 -m venv .venv 
           source .venv/bin/activate 
           echo "Install Python requirements... "
           pip install -r requirements.txt
           echo "Build Aeneas C extensions... "
-          export LIBRARY_PATH=/opt/homebrew/lib
+          export LIBRARY_PATH="$LIBRARY_PATH:$(brew --prefix)/lib"
           python setup.py build_ext --inplace 
 
           echo "Create Pyinstaller one directory executable"
           pyinstaller pyinstaller-onedir.spec --clean
 
+      - name: Allow binary execution
+        run: xattr -d com.apple.quarantine dist/aeneas-cli/aeneas-cli
+
       - name: Tar build
-        run: tar -cvf aeneas-cli.mac.tar ./dist/aeneas-cli
+        run: |
+          cd dist
+          tar -cvf aeneas-cli.mac.tar aeneas-cli
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4

@@ -13,7 +13,8 @@ jobs:
       - name: Install dependencies and create one dir executable
         run: |
           echo "Install OS dependencies"
-          choco install espeak-ng python
+          choco install espeak-ng python ffmpeg
+          New-Item -ItemType HardLink -Path "C:\Program Files\eSpeak NG\espeak" -Target "C:\Program Files\eSpeak NG\espeak-ng"
           echo "Creating python Virtual environment... "
           python -m venv .venv 
           .venv\Scripts\activate 
@@ -26,7 +27,9 @@ jobs:
           pyinstaller pyinstaller-onedir.spec --clean
 
       - name: Tar build # It appears that windows has a tar command
-        run: tar -cvf aeneas-cli.win.tar .\dist\aeneas-cli
+        run: |
+          cd dist
+          tar -cvf aeneas-cli.win.tar aeneas-cli
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
