@@ -17,7 +17,9 @@ jobs:
           New-Item -ItemType HardLink -Path "C:\Program Files\eSpeak NG\espeak.exe" -Target "C:\Program Files\eSpeak NG\espeak-ng.exe"
           echo "Creating python Virtual environment... "
           python -m venv .venv 
-          .venv\Scripts\activate 
+          .venv\Scripts\activate
+          echo "Linking eSpeak NG library path"
+          link /LIBPATH:"C:\Program Files\eSpeak NG"
           echo "Install Python requirements... "
           pip install -r requirements.txt 
           echo "Build Aeneas C extensions... "
