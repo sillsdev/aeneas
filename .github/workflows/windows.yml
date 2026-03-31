@@ -10,22 +10,21 @@ jobs:
       - name: Checkout app-builders-pyinstaller
         uses: actions/checkout@v5
 
+      - name: Setup Python version
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.14.4"
+
       - name: Install dependencies
         run: |
           echo "Install OS dependencies"
-          choco install espeak-ng python
+          choco install espeak-ng
           refreshenv
           echo "Creating python Virtual environment... "
           python -m venv .venv 
           .venv\Scripts\activate
           echo "Install Python requirements... "
           pip install -r requirements.txt
-
-      - name: Add Linking
-        run: |
-          echo "Add Linking for eSpeak-ng"
-          /usr/bin/link --help
-          /usr/bin/link -L:"C:\Program Files\eSpeak NG"
 
       - name: Build PyInstaller one dir executable
         run: |
