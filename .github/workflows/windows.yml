@@ -10,12 +10,6 @@ jobs:
       - name: Checkout app-builders-pyinstaller
         uses: actions/checkout@v5
 
-      - name: Setup MSVC environment
-        # This script sets up the correct environment variables, including PATH
-        run: |
-          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x64
-        shell: cmd
-
       - name: Install dependencies
         run: |
           echo "Install OS dependencies"
@@ -27,10 +21,23 @@ jobs:
           echo "Install Python requirements... "
           pip install -r requirements.txt
 
+      - name: Setup MSVC environment
+        # This script sets up the correct environment variables, including PATH
+        run: |
+          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x64
+        shell: cmd
+
+      - name: Remove /usr/bin/link from path
+        shell: bash
+        run: |
+          rm 'C:\Program Files\Git\usr\bin\link.exe'
+          rm 'C:\Program Files\Git\usr\bin\sh.exe'
+
       - name: Add Linking
         run: |
           echo "Add Linking for eSpeak-ng"
           link /libpath:"C:\Program Files\eSpeak NG"
+        shell: cmd
 
       - name: Build PyInstaller one dir executable
         run: |
