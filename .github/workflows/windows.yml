@@ -26,7 +26,6 @@ jobs:
           echo "Add Linking for eSpeak-ng"
           /usr/bin/link --help
           /usr/bin/link -L:"C:\Program Files\eSpeak NG"
-        shell: cmd
 
       - name: Build PyInstaller one dir executable
         run: |
