@@ -89,6 +89,7 @@ def prepare_cew_for_windows():
             "C:\\sync\\eSpeak\\espeak_sapi.dll",
             "C:\\Program Files\\eSpeak\\espeak_sapi.dll",
             "C:\\Program Files (x86)\\eSpeak\\espeak_sapi.dll",
+            "C:\\Program Files\\eSpeak NG\\libespeak-ng.dll",
         ]
         if os.path.exists(espeak_dll_dst_path):
             print("[INFO] Found eSpeak DLL in %s" % espeak_dll_dst_path)
@@ -215,7 +216,7 @@ if IS_WINDOWS:
     PKG_SCRIPTS = [s + ".py" for s in PKG_SCRIPTS]
 
 # prepare Extension objects
-if IS_OSX:
+if IS_OSX or IS_WINDOWS:
     espeak_lib = "espeak-ng"
 else:
     espeak_lib = "espeak"
