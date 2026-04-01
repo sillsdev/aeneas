@@ -10,6 +10,11 @@ jobs:
       - name: Checkout app-builders-pyinstaller
         uses: actions/checkout@v5
 
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v2
+        with:
+          vs-version: "latest"
+
       - name: Setup Python version
         uses: actions/setup-python@v6
         with:
@@ -36,10 +41,10 @@ jobs:
           echo "Create PyInstaller one directory executable"
           pyinstaller pyinstaller-onedir.spec --clean
 
-      - name: Tar build # It appears that windows has a tar command
-        run: |
-          cd dist
-          tar -cvf aeneas-cli.win.tar aeneas-cli
+      #- name: Tar build # It appears that windows has a tar command
+      # run: |
+      #   cd dist
+      #   tar -cvf aeneas-cli.win.tar aeneas-cli
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
