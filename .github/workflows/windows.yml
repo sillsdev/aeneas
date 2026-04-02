@@ -33,10 +33,14 @@ jobs:
           python -m pip install --upgrade pip
           echo "Install Python requirements... "
           pip install -r requirements.txt
+          setx LIBRARY_PATH "C:\Program Files\eSpeak NG\lib"
+          setx INCLUDE_PATH "C:\Program Files\eSpeak NG\include"
 
       - name: Build Extensions and run PyInstaller one dir
         run: |
           echo "Build Aeneas C extensions... "
+          set LIBRARY_PATH=C:\Program Files\eSpeak NG\lib
+          set INCLUDE_PATH=C:\Program Files\eSpeak NG\include
           python setup.py build_ext --inplace
 
           echo "Create PyInstaller one directory executable"
@@ -50,5 +54,5 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: aeneas-cli.win.tar
-          path: dist/aeneas-cli.win.tar
+          name: aeneas-cli.win.zip
+          path: dist/aeneas-cli/

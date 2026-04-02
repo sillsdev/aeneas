@@ -26,13 +26,8 @@ jobs:
           echo "Create Pyinstaller one directory executable"
           pyinstaller pyinstaller-onedir.spec --clean
 
-      - name: Tar build
-        run: |
-          cd dist
-          tar -cvf aeneas-cli.mac.tar aeneas-cli
-
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: aeneas-cli.mac.tar
-          path: dist/aeneas-cli.mac.tar
+          name: aeneas-cli.mac.zip
+          path: dist/aeneas-cli/
