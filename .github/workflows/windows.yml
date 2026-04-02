@@ -38,8 +38,8 @@ jobs:
 
           echo "Build Aeneas C extensions... "
 
-          set LIBRARY_PATH=C:\Program Files\eSpeak NG\lib
-          set INCLUDE_PATH=C:\Program Files\eSpeak NG\include
+          set LIBRARY_PATH='C:\Program Files\eSpeak NG\lib'
+          set INCLUDE_PATH='C:\Program Files\eSpeak NG\include'
           python setup.py build_ext --inplace
 
           echo "Create PyInstaller one directory executable"
