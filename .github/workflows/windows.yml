@@ -26,9 +26,9 @@ jobs:
           echo "Install OS dependencies"
           choco install espeak-ng
           refreshenv
-          #echo "Creating python Virtual environment... "
-          #python -m venv .venv 
-          #.venv\Scripts\activate
+          echo "Creating python Virtual environment... "
+          python -m venv .venv 
+          .venv\Scripts\activate
           echo "Update pip"
           python -m pip install --upgrade pip
           echo "Install Python requirements... "
@@ -36,9 +36,8 @@ jobs:
           setx LIBRARY_PATH "C:\Program Files\eSpeak NG\lib"
           setx INCLUDE_PATH "C:\Program Files\eSpeak NG\include"
 
-      - name: Build Extensions and run PyInstaller one dir
-        run: |
           echo "Build Aeneas C extensions... "
+
           set LIBRARY_PATH=C:\Program Files\eSpeak NG\lib
           set INCLUDE_PATH=C:\Program Files\eSpeak NG\include
           python setup.py build_ext --inplace
