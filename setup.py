@@ -216,7 +216,7 @@ if IS_WINDOWS:
     PKG_SCRIPTS = [s + ".py" for s in PKG_SCRIPTS]
 
 # prepare Extension objects
-if IS_OSX:
+if IS_OSX or IS_WINDOWS:
     espeak_lib = "espeak-ng"
 else:
     espeak_lib = "espeak"
@@ -240,6 +240,8 @@ EXTENSION_CEW = Extension(
     name="aeneas.cew.cew",
     sources=["aeneas/cew/cew_py.c", "aeneas/cew/cew_func.c"],
     libraries=[espeak_lib],
+    include_dirs=[get_include()],
+    library_dirs=[os.path.dirname(__file__)] if IS_WINDOWS else [],
 )
 EXTENSION_CFW = Extension(
     name="aeneas.cfw.cfw",
