@@ -60,7 +60,6 @@ def main():
             # Linux is not included here because the package manager is the preferred way
             # to add the package
             os.environ["ESPEAK_DATA_PATH"] = str(Path(__file__).resolve().parent.parent)
-            print("ESPEAK_DATA_PATH:" + os.environ["ESPEAK_DATA_PATH"])
         HydraCLI(invoke="aeneas-cli").run(arguments=sys.argv, show_help=False)
     else:
         HydraCLI(invoke="pyinstaller-aeneas-cli.py").run(
