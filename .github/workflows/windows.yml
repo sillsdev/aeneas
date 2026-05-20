@@ -25,13 +25,18 @@ jobs:
           echo "Create PyInstaller one directory executable"
           pyinstaller pyinstaller-onedir-win.spec --clean
 
+          echo "Copy eSpeak NG files to aeneas-cli root"
+          Copy-Item -Path "c:\program files\eSpeak ng\espeak-ng-data" -Destination "dist\aeneas-cli" -Recurse
+          Copy-Item -Path "c:\program files\eSpeak ng\libespeak-ng.dll" -Destination "dist\aeneas-cli"
+          Copy-Item -Path "c:\program files\eSpeak ng\espeak-ng.exe" -Destination "dist\aeneas-cli"
+
       #- name: Tar build # It appears that windows has a tar command
       # run: |
       #   cd dist
       #   tar -cvf aeneas-cli.win.tar aeneas-cli
 
       - name: Zip build output
-        run: Compress-Archive -Path dist\aeneas-cli -DestinationPath aeneas-cli.win.zip
+        run: Compress-Archive -Path dist\aeneas-cli\* -DestinationPath aeneas-cli.win.zip
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4

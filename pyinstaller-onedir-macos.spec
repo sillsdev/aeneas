@@ -26,11 +26,7 @@ block_cipher = None
 a = Analysis(
     ['pyinstaller-aeneas-cli.py'],
     pathex=[],
-    binaries=[
-        ("/opt/homebrew/share/espeak-ng-data/*", "espeak-ng-data"),
-        ("/opt/homebrew/lib/libespeak-ng*", '.'),
-        ("/opt/homebrew/bin/espeak-ng", '.'),
-    ],
+    binaries=[],
     datas=datas,
     hiddenimports=[
         'numpy',
