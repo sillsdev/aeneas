@@ -36,7 +36,7 @@ jobs:
           cp "$BREW_PREFIX/lib"/libespeak-ng* dist/aeneas-cli/
 
       - name: Zip build output
-        run: cd dist/aeneas-cli && zip -r ../aeneas-cli.mac.zip .
+        run: cd dist/aeneas-cli && zip -r ../../aeneas-cli.mac.zip .
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
