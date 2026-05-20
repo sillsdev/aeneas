@@ -26,11 +26,7 @@ block_cipher = None
 a = Analysis(
     ['pyinstaller-aeneas-cli.py'],
     pathex=[],
-    binaries=[
-        ("c:/program files/eSpeak ng/espeak-ng-data/*", "espeak-ng-data"),
-        ("c:/program files/eSpeak ng/libespeak-ng.dll", '.'), 
-        ("c:/program files/eSpeak ng/espeak-ng.exe", '.')
-    ],
+    binaries=[],
     datas=datas,
     hiddenimports=[
         'numpy',
