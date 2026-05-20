@@ -31,9 +31,9 @@ jobs:
 
           echo "Copy espeak-ng files to aeneas-cli root"
           BREW_PREFIX="$(brew --prefix)"
-          cp -R "$BREW_PREFIX/share/espeak-ng-data" dist/aeneas-cli/
-          cp "$BREW_PREFIX/bin/espeak-ng" dist/aeneas-cli/
-          cp "$BREW_PREFIX/lib"/libespeak-ng* dist/aeneas-cli/
+          cp -RL "$BREW_PREFIX/share/espeak-ng-data" dist/aeneas-cli/
+          cp -L "$BREW_PREFIX/bin/espeak-ng" dist/aeneas-cli/
+          cp -L "$BREW_PREFIX/lib"/libespeak-ng* dist/aeneas-cli/
 
       - name: Zip build output
         run: cd dist/aeneas-cli && zip -r ../../aeneas-cli.mac.zip .
