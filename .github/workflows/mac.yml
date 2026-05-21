@@ -10,6 +10,9 @@ jobs:
   pyinstaller-build:
     runs-on: macos-latest
     steps:
+      - name: Set VERSION file from tag
+        if: github.ref_type == 'tag'
+        run: echo "${{ github.ref_name }}" | sed 's/^v//' > VERSION
       - name: Checkout app-builders-pyinstaller
         uses: actions/checkout@v5
 

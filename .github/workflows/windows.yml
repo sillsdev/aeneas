@@ -10,6 +10,9 @@ jobs:
   pyinstaller-build:
     runs-on: windows-self-hosted
     steps:
+      - name: Set VERSION file from tag
+        if: github.ref_type == 'tag'
+        run: ($env:GITHUB_REF_NAME -replace '^v','') | Out-File -Encoding utf8 VERSION
       - name: Checkout app-builders-pyinstaller
         uses: actions/checkout@v5
 

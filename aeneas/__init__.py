@@ -35,4 +35,11 @@ __copyright__ = """
     """
 __license__ = "GNU AGPL v3"
 __status__ = "Production"
-__version__ = "1.7.3"
+import os
+_default_version = "1.7.3"
+_version_file = os.path.join(os.path.dirname(__file__), "..", "..", "VERSION")
+try:
+    with open(_version_file, "r") as f:
+        __version__ = f.read().strip()
+except Exception:
+    __version__ = _default_version
