@@ -10,11 +10,12 @@ jobs:
   pyinstaller-build:
     runs-on: windows-self-hosted
     steps:
-      - name: Set VERSION file from tag
-        if: github.ref_type == 'tag'
-        run: ($env:GITHUB_REF_NAME -replace '^v','') | Out-File -Encoding utf8 VERSION
       - name: Checkout app-builders-pyinstaller
         uses: actions/checkout@v5
+
+      - name: Set VERSION file from tag
+        if: github.ref_type == 'tag'
+        run: Set-Content -Path VERSION -Value ($env:GITHUB_REF_NAME -replace '^v','') -NoNewline
 
       - name: Install dependencies
         run: |
@@ -27,6 +28,8 @@ jobs:
 
           echo "Create PyInstaller one directory executable"
           pyinstaller pyinstaller-onedir-win.spec --clean
+
+          Copy-Item -Path "VERSION" -Destination "dist\aeneas-cli\VERSION"
 
           echo "Copy eSpeak NG files to aeneas-cli root"
           Copy-Item -Path "c:\program files\eSpeak ng\espeak-ng-data" -Destination "dist\aeneas-cli" -Recurse

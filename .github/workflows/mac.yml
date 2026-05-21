@@ -10,11 +10,12 @@ jobs:
   pyinstaller-build:
     runs-on: macos-latest
     steps:
+      - name: Checkout app-builders-pyinstaller
+        uses: actions/checkout@v5
+
       - name: Set VERSION file from tag
         if: github.ref_type == 'tag'
         run: echo "${{ github.ref_name }}" | sed 's/^v//' > VERSION
-      - name: Checkout app-builders-pyinstaller
-        uses: actions/checkout@v5
 
       - name: Install dependencies and create one dir executable
         run: |
@@ -31,6 +32,8 @@ jobs:
 
           echo "Create Pyinstaller one directory executable"
           pyinstaller pyinstaller-onedir-macos.spec --clean
+
+          cp VERSION dist/aeneas-cli/VERSION
 
           echo "Copy espeak-ng files to aeneas-cli root"
           BREW_PREFIX="$(brew --prefix)"
