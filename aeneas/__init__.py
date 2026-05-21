@@ -37,9 +37,18 @@ __license__ = "GNU AGPL v3"
 __status__ = "Production"
 import os
 _default_version = "1.7.3"
-_version_file = os.path.join(os.path.dirname(__file__), "..", "..", "VERSION")
-try:
-    with open(_version_file, "r") as f:
-        __version__ = f.read().strip()
-except Exception:
-    __version__ = _default_version
+_base_dir = os.path.dirname(__file__)
+_version_candidates = [
+    os.path.join(_base_dir, "..", "VERSION"),
+    os.path.join(_base_dir, "..", "..", "VERSION")
+]
+__version__ = _default_version
+for _version_file in _version_candidates:
+    try:
+        with open(_version_file, "r") as f:
+            _value = f.read().strip()
+        if _value:
+            __version__ = _value
+            break
+    except Exception:
+        pass

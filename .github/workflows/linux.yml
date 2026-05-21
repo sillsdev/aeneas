@@ -10,11 +10,12 @@ jobs:
   pyinstaller-build:
     runs-on: ubuntu-22.04
     steps:
+      - name: Checkout app-builders-pyinstaller
+        uses: actions/checkout@v5
+
       - name: Set VERSION file from tag
         if: github.ref_type == 'tag'
         run: echo "${{ github.ref_name }}" | sed 's/^v//' > VERSION
-      - name: Checkout app-builders-pyinstaller
-        uses: actions/checkout@v5
 
       - name: Install dependencies and create one dir executable
         run: |
@@ -31,6 +32,8 @@ jobs:
 
           echo "Create PyInstaller one directory executable"
           pyinstaller pyinstaller-onedir.spec --clean
+
+          cp VERSION dist/aeneas-cli/VERSION
 
       - name: Zip build output
         run: cd dist && zip -r ../aeneas-cli.linux.zip aeneas-cli/

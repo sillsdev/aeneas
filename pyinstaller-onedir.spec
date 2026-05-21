@@ -15,6 +15,7 @@ datas = [
     # required
     ("aeneas/res/*",            "aeneas/res"),
     ("aeneas/tools/res/*",      "aeneas/tools/res"),
+    ("VERSION",                 "."),
     # optional, copy files
     ("aeneas/extra/*.py",       "aeneas/extra"),
     # optional, create output directory
