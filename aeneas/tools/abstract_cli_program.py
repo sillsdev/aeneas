@@ -259,12 +259,15 @@ class AbstractCLIProgram(Loggable):
 
     def print_name_version(self):
         """
-        Print program name and version and exit.
+        Print only the version if frozen, else print tool name and version.
 
         :rtype: int
         """
         if self.use_sys:
-            self.print_generic(u"%s v%s" % (self.NAME, aeneas_version))
+            if gf.FROZEN:
+                self.print_generic(u"%s" % aeneas_version)
+            else:
+                self.print_generic(u"%s v%s" % (self.NAME, aeneas_version))
         return self.exit(self.HELP_EXIT_CODE)
 
     def print_rconf_parameters(self):
