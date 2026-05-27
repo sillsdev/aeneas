@@ -36,22 +36,17 @@ jobs:
           Copy-Item -Path "c:\program files\eSpeak ng\libespeak-ng.dll" -Destination "dist\aeneas-cli"
           Copy-Item -Path "c:\program files\eSpeak ng\espeak-ng.exe" -Destination "dist\aeneas-cli"
 
-      #- name: Tar build # It appears that windows has a tar command
-      # run: |
-      #   cd dist
-      #   tar -cvf aeneas-cli.win.tar aeneas-cli
-
-      - name: Zip build output
-        run: Compress-Archive -Path dist\aeneas-cli\* -DestinationPath aeneas-cli.win.zip
+      - name: Create tar.gz archive
+        run: tar -czf aeneas-cli.win.tar.gz -C dist/aeneas-cli .
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: aeneas-cli.win.zip
-          path: aeneas-cli.win.zip
+          name: aeneas-cli.win.tar.gz
+          path: aeneas-cli.win.tar.gz
 
       - name: Release
         uses: softprops/action-gh-release@v2.6.1
         if: github.ref_type == 'tag'
         with:
-          files: aeneas-cli.win.zip
+          files: aeneas-cli.win.tar.gz

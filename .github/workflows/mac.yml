@@ -41,17 +41,17 @@ jobs:
           cp -L "$BREW_PREFIX/bin/espeak-ng" dist/aeneas-cli/
           cp -L "$BREW_PREFIX/lib"/libespeak-ng* dist/aeneas-cli/
 
-      - name: Zip build output
-        run: cd dist/aeneas-cli && zip -r ../../aeneas-cli.mac.zip .
+      - name: Create tar.gz archive
+        run: tar -czf aeneas-cli.mac.tar.gz -C dist/aeneas-cli .
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: aeneas-cli.mac.zip
-          path: aeneas-cli.mac.zip
+          name: aeneas-cli.mac.tar.gz
+          path: aeneas-cli.mac.tar.gz
 
       - name: Release
         uses: softprops/action-gh-release@v2.6.1
         if: github.ref_type == 'tag'
         with:
-          files: aeneas-cli.mac.zip
+          files: aeneas-cli.mac.tar.gz

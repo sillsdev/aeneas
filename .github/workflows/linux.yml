@@ -35,17 +35,17 @@ jobs:
 
           cp VERSION dist/aeneas-cli/VERSION
 
-      - name: Zip build output
-        run: cd dist && zip -r ../aeneas-cli.linux.zip aeneas-cli/
+      - name: Create tar.gz archive
+        run: tar -czf aeneas-cli.linux.tar.gz -C dist/aeneas-cli .
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: aeneas-cli.linux.zip
-          path: aeneas-cli.linux.zip
+          name: aeneas-cli.linux.tar.gz
+          path: aeneas-cli.linux.tar.gz
 
       - name: Release
         uses: softprops/action-gh-release@v2.6.1
         if: github.ref_type == 'tag'
         with:
-          files: aeneas-cli.linux.zip
+          files: aeneas-cli.linux.tar.gz
