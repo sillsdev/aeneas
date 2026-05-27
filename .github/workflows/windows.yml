@@ -36,10 +36,10 @@ jobs:
           Copy-Item -Path "c:\program files\eSpeak ng\libespeak-ng.dll" -Destination "dist\aeneas-cli"
           Copy-Item -Path "c:\program files\eSpeak ng\espeak-ng.exe" -Destination "dist\aeneas-cli"
 
-      #- name: Tar build # It appears that windows has a tar command
-      # run: |
-      #   cd dist
-      #   tar -cvf aeneas-cli.win.tar aeneas-cli
+      - name: Install 7zip
+        uses: milliewalky/setup-7-zip@v2
+        with:
+          tag: ""
 
       - name: Zip build output
         run: 7z a -tzip aeneas-cli.win.zip .\dist\aeneas-cli\*
