@@ -42,7 +42,7 @@ jobs:
       #   tar -cvf aeneas-cli.win.tar aeneas-cli
 
       - name: Zip build output
-        run: Compress-Archive -Path dist\aeneas-cli\* -DestinationPath aeneas-cli.win.zip
+        run: 7z a -tzip aeneas-cli.win.zip .\dist\aeneas-cli\*
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
