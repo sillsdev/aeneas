@@ -39,7 +39,8 @@ jobs:
           BREW_PREFIX="$(brew --prefix)"
           cp -RL "$BREW_PREFIX/share/espeak-ng-data" dist/aeneas-cli/
           cp -L "$BREW_PREFIX/bin/espeak-ng" dist/aeneas-cli/
-          cp -L "$BREW_PREFIX/lib"/libespeak-ng* dist/aeneas-cli/
+          cp -L "$BREW_PREFIX/lib"/libespeak-ng*.dylib dist/aeneas-cli/
+          cp -L "$BREW_PREFIX/lib"/libpcaudio*.dylib dist/aeneas-cli/
 
       - name: Zip build output
         run: cd dist/aeneas-cli && zip -r ../../aeneas-cli.mac.zip .
