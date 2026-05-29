@@ -791,6 +791,10 @@ class ESPEAKTTSWrapper(BaseTTSWrapper):
 
     def __init__(self, rconf=None, logger=None):
         super(ESPEAKTTSWrapper, self).__init__(rconf=rconf, logger=logger)
+        # When frozen (PyInstaller build), allow all languages that espeak-ng supports
+        # without filtering against the hardcoded LANGUAGE_TO_VOICE_CODE list
+        if gf.FROZEN:
+            self.rconf[RuntimeConfiguration.ALLOW_UNLISTED_LANGUAGES] = True
         self.set_subprocess_arguments([
             self.tts_path,
             u"-v",
