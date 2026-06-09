@@ -36,7 +36,7 @@ jobs:
           cp VERSION dist/aeneas-cli/VERSION
 
       - name: Zip build output
-        run: cd dist && zip -r ../aeneas-cli.linux.zip aeneas-cli/
+        run: cd dist/aeneas-cli && zip -r ../../aeneas-cli.linux.zip .
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
