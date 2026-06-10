@@ -216,10 +216,8 @@ if IS_WINDOWS:
     PKG_SCRIPTS = [s + ".py" for s in PKG_SCRIPTS]
 
 # prepare Extension objects
-if IS_OSX or IS_WINDOWS:
-    espeak_lib = "espeak-ng"
-else:
-    espeak_lib = "espeak"
+# Exclusively use espeak-ng
+espeak_lib = "espeak-ng"
 
 EXTENSION_CDTW = Extension(
     name="aeneas.cdtw.cdtw",
